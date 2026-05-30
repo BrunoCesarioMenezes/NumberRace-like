@@ -1,0 +1,26 @@
+<div class="padlock-visual">
+    <div class="padlock-shackle"></div>
+    <div class="padlock-body">
+        <p class="padlock-status">Cadeado ${index + 1}</p>
+
+        <div class="digit-inputs-container">
+            <input class="digit-input password-digit-${index}" type="text" maxlength="1" inputmode="numeric" placeholder="•">
+            <input class="digit-input password-digit-${index}" type="text" maxlength="1" inputmode="numeric" placeholder="•">
+            <input class="digit-input password-digit-${index}" type="text" maxlength="1" inputmode="numeric" placeholder="•">
+            <input class="digit-input password-digit-${index}" type="text" maxlength="1" inputmode="numeric" placeholder="•">
+        </div>
+
+        <!-- Modo Padrão: Destrancar e Editar -->
+        <div class="padlock-actions default-actions">
+            <button class="btn btn-unlock" id="unlock${index}">Unlock</button>
+            <button class="btn btn-edit" id="edit${index}">Edit</button>
+        </div>
+
+        <!-- Modo Edição Interno (Substitui o Prompt) -->
+        <div class="padlock-actions edit-actions" style="display: none;">
+            <button class="btn btn-save" id="save${index}">Save</button>
+            <button class="btn btn-cancel" id="cancel${index}">Cancel</button>
+        </div>
+    </div>
+</div>
+<script type="module" src="main.js"></script>
