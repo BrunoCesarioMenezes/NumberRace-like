@@ -1,0 +1,220 @@
+
+/* CADEADOS */
+#padlock-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    padding: 20px;
+}
+
+.padlock-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 200px;
+    padding-top: 65px;
+    perspective: 1000px;
+}
+
+.padlock-visual {
+    width: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.padlock-shackle {
+    position: absolute;
+    top: -55px;
+    left: 42px;
+    width: 116px;
+    height: 90px;
+    border: 10px solid #d4d4d8;
+    border-bottom: none;
+    border-top-left-radius: 58px;
+    border-top-right-radius: 58px;
+    box-sizing: border-box;
+
+    z-index: 0;
+
+    transform-origin: 10px calc(100% - 10px);
+
+    transform: translate3d(0, 0, 0) rotateY(0deg);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s;
+}
+
+.padlock-body {
+    position: relative;
+    width: 100%;
+    background: #27272a;
+    border-radius: 16px;
+    padding: 24px 20px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.4s ease, border-color 0.4s;
+    border: 1px solid #3f3f46;
+}
+
+.padlock-status {
+    margin: 0 0 20px 0;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #a1a1aa;
+    text-align: center;
+}
+/* FIM CADEADOS */
+
+/*---------------------------------------------------------------*/
+
+/* DIGITOS */
+.digit-inputs-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.digit-input {
+    width: 32px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    background: #18181b;
+    color: #ffffff;
+    transition: all 0.15s ease;
+}
+
+.digit-input::placeholder {
+    color: #52525b;
+}
+
+.digit-input:focus {
+    outline: none;
+    border-color: #a1a1aa;
+    background: #27272a;
+}
+/* FIM DIGITOS */
+
+/*---------------------------------------------------------------*/
+
+/* BOTÕES */
+.padlock-actions {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.btn {
+    flex: 1;
+    padding: 9px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-unlock {
+    background-color: #ffffff;
+    color: #18181b;
+}
+
+.btn-unlock:hover {
+    background-color: #f4f4f5;
+}
+
+.btn-edit {
+    background-color: transparent;
+    border-color: #3f3f46;
+    color: #e4e4e7;
+}
+
+.btn-edit:hover {
+    background-color: #3f3f46;
+}
+
+.btn-save {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #2563eb;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    border: 1px solid #3f3f46;
+    color: #a1a1aa;
+}
+
+.btn-cancel:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* FIM SEÇÃO DE BOTÕES */
+
+/*---------------------------------------------------------------*/
+
+/* ANIMAÇÂO AO ACERTAR SENHA */
+
+.unlocked .padlock-shackle {
+    transform: translateY(-20px) rotateY(-180deg);
+    border-color: #a1a1aa;
+}
+
+.unlocked .padlock-body {
+    background-color: #18181b;
+    border-color: #27272a;
+}
+
+.unlocked .padlock-status {
+    color: #34d399;
+}
+
+/*---------------------------------------------------------------*/
+
+
+/* ANIMAÇÂO AO ERRAR SENHA*/
+
+.error-shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    15%,
+    45%,
+    75% {
+        transform: translateX(-6px);
+    }
+
+    30%,
+    60%,
+    90% {
+        transform: translateX(6px);
+    }
+}
+
+.error-shake .padlock-body {
+    border-color: #f87171;
+}
+
+/*---------------------------------------------------------------*/
