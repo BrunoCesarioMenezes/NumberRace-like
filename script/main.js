@@ -1,10 +1,10 @@
-import Padlock from "./Padlock.js";
+import Padlock from "../classes/Padlock.js";
 
 initializePadlocks();
 
 async function initializePadlocks() {
     const getPadlockStructure = async () => {
-        const response = await fetch("./padlock.html");
+        const response = await fetch("../components/padlock.html");
         const templateHTML = await response.text();
 
         // Transforma o texto do HTML em uma função interpretadora de crases compilada na hora
