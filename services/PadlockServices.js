@@ -4,7 +4,6 @@ export default class PadlockServices {
             const response = await fetch("../components/padlock.html");
             const templateHTML = await response.text();
 
-            // Transforma o texto do HTML em uma função interpretadora de crases compilada na hora
             return new Function("index", `return \`${templateHTML}\`;`);
         }
 
@@ -20,9 +19,18 @@ export default class PadlockServices {
             if (!padlock.isLocked()) {
                 div.classList.add("unlocked");
             }
-
-            // 1. CORREÇÃO: Executa a função do template uma única vez e insere na div
             div.innerHTML = padlockTemplate(index);
+
+            for (let i = 0; i < padlock.getNumberOfDigits(); i++) {
+                let input = document.createElement("input");
+                input.type = "text";
+                input.maxLength = 1;
+                input.classList.add(`digit-input`, `password-digit-${index}`);
+                input.inputMode = "numeric";
+                input.placeholder = "•";
+                div.querySelector(".digit-inputs-container").appendChild(input);
+            }
+
             padlockContainer.appendChild(div);
 
             PadlockServices.applyPadlockEvents(div, padlock, index);
@@ -30,19 +38,16 @@ export default class PadlockServices {
     }
 
     static applyPadlockEvents(div, padlock, index) {
-        // 2. CORREÇÃO: Busca os elementos por classes de forma relativa (dentro da div atual)
         const inputs = div.querySelectorAll(".digit-input");
         const statusText = div.querySelector(".padlock-status");
         const defaultActions = div.querySelector(".default-actions");
         const editActions = div.querySelector(".edit-actions");
 
-        // Seleciona os botões pelas classes definidas no padlock.html
         const btnUnlock = div.querySelector(".btn-unlock");
         const btnEdit = div.querySelector(".btn-edit");
         const btnSave = div.querySelector(".btn-save");
         const btnCancel = div.querySelector(".btn-cancel");
 
-        // Lógica para pular inputs automaticamente ao digitar
         inputs.forEach((input, idx) => {
             input.addEventListener('input', (e) => {
                 if (e.target.value && idx < inputs.length - 1) {
@@ -58,7 +63,6 @@ export default class PadlockServices {
 
         const clearInputs = () => inputs.forEach(input => input.value = "");
 
-        // 3. CORREÇÃO: Eventos aplicados diretamente nas variáveis dos botões
         btnUnlock.addEventListener("click", () => {
             div.classList.remove("error-shake");
             let inputPassword = Array.from(inputs).map(input => input.value).join("");
@@ -96,7 +100,7 @@ export default class PadlockServices {
         btnSave.addEventListener("click", () => {
             let newPassword = Array.from(inputs).map(input => input.value).join("");
 
-            if (newPassword.length === 4 && !isNaN(newPassword)) {
+            if (!isNaN(newPassword)) {
                 padlock.setPassword(newPassword);
                 padlock.lock();
 

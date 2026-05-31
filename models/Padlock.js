@@ -1,7 +1,8 @@
 export default class Padlock {
-    constructor(password) {
+    constructor(password, numberOfDigits) {
         this.locked = true;
         this.password = password;
+        this.numberOfDigits = numberOfDigits;
     }
 
     setPassword(newPassword) {
@@ -10,6 +11,10 @@ export default class Padlock {
 
     getPassword() {
         return this.password;
+    }
+
+    getNumberOfDigits() {
+        return this.numberOfDigits;
     }
 
     lock() {
