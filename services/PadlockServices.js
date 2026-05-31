@@ -1,7 +1,7 @@
 export default class PadlockServices {
     static async initializePadlocks(inputPadlocks) {
         const getPadlockStructure = async () => {
-            const response = await fetch("../components/padlock.html");
+            const response = await fetch("./components/padlock.html");
             const templateHTML = await response.text();
 
             return new Function("index", `return \`${templateHTML}\`;`);
